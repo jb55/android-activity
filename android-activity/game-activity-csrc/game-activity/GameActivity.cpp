@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "GameActivity.h"
+#include <game-activity/GameActivity.h>
 #include "GameActivityEvents_internal.h"
 
 #include <android/api-level.h>
@@ -39,8 +39,8 @@
 #include <mutex>
 #include <string>
 
-#include "GameActivityLog.h"
-#include "system_utils.h"
+#include <game-activity/GameActivityLog.h>
+#include <system_utils.h>
 
 namespace {
 
@@ -908,7 +908,6 @@ static bool onTouchEvent_native(JNIEnv *env, jobject javaGameActivity,
     GameActivityMotionEvent_fromJava(
         env, motionEvent, &c_event, pointerCount, historySize);
     return code->callbacks.onTouchEvent(code, &c_event);
-
 }
 
 static bool onKeyUp_native(JNIEnv *env, jobject javaGameActivity, jlong handle,

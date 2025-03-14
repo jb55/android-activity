@@ -389,7 +389,11 @@ impl AndroidAppInner {
                                     ffi::NativeAppGlueAppCmd_APP_CMD_WINDOW_INSETS_CHANGED => {
                                         MainEvent::InsetsChanged {}
                                     }
-                                    _ => unreachable!(),
+                                    v => {
+                                        log::warn!("unhandled APP_CMD: {v}");
+                                        ffi::android_app_post_exec_cmd(native_app.as_ptr(), cmd_i);
+                                        return;
+                                    }
                                 };
 
                                 trace!("Read ID_MAIN command {cmd_i} = {cmd:?}");

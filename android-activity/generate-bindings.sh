@@ -36,18 +36,25 @@ while read ARCH && read TARGET ; do
         --blocklist-function 'GameActivity_onCreate_C' \
         --newtype-enum '\w+_(result|status)_t' \
         -- \
+	-Doff64_t=__off64_t \
+	-DAAssetManager='void*' \
+	-DANDROID_ASSET_MANAGER_H \
+	-D_PTHREAD_H \
         -Iandroid-games-sdk/game-activity/prefab-src/modules/game-activity/include \
         -Iandroid-games-sdk/game-text-input/prefab-src/modules/game-text-input/include \
         -Iandroid-games-sdk/include \
         --sysroot="$SYSROOT" --target=$TARGET
+	#-I$SYSROOT/usr/include/linux \
+
 
 done << EOF
-arm
-arm-linux-androideabi
-aarch64
-aarch64-linux-android
-i686
-i686-linux-android
 x86_64
 x86_64-linux-android
 EOF
+
+#aarch64
+#arm
+#arm-linux-androideabi
+#aarch64-linux-android
+#i686
+#i686-linux-android

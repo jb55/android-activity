@@ -676,10 +676,18 @@ void android_app_clear_key_events(struct android_input_buffer* inputBuffer) {
 
 static void onTextInputEvent(GameActivity* activity,
                              const GameTextInputState* state) {
+  LOGV("onTextInputEvent: '%.*s' sel(%d,%d) composing(%d,%d)",
+      state->text_length, state->text_UTF8,
+      state->selection.start,
+      state->selection.end,
+      state->composingRegion.start,
+      state->composingRegion.end);
+
   struct android_app* android_app = ToApp(activity);
   pthread_mutex_lock(&android_app->mutex);
   if (!android_app->destroyed) {
     android_app->textInputState = 1;
+    LOGV("setting android_app->textInputState %d", android_app->textInputState);
     notifyInput(android_app);
   }
   pthread_mutex_unlock(&android_app->mutex);

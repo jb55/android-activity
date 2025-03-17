@@ -7236,6 +7236,10 @@ pub struct android_app {
     pub window: *mut ANativeWindow,
     #[doc = " Current content rectangle of the window; this is the area where the\n window's content should be placed to be seen by the user."]
     pub contentRect: ARect,
+    #[doc = " Whether the software keyboard is visible or not."]
+    pub softwareKeyboardVisible: bool,
+    #[doc = " Last editor action. Valid within APP_CMD_SOFTWARE_KB_VIS_CHANGED handler."]
+    pub editorAction: ::std::os::raw::c_int,
     #[doc = " Current state of the app's activity.  May be either APP_CMD_START,\n APP_CMD_RESUME, APP_CMD_PAUSE, or APP_CMD_STOP."]
     pub activityState: ::std::os::raw::c_int,
     #[doc = " This is non-zero when the application's GameActivity is being\n destroyed and waiting for the app thread to complete."]
